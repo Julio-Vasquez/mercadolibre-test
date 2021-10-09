@@ -1,0 +1,53 @@
+.loader {
+  margin: 0 auto;
+  width: 60px;
+  height: 50px;
+  text-align: center;
+  font-size: 10px;
+  position: absolute;
+
+  > div {
+    height: 100%;
+    width: 8px;
+    display: inline-block;
+    margin-left: 2px;
+    animation: delay 0.8s infinite ease-in-out;
+  }
+
+  $delay: -0.7;
+  @for $i from 2 through 6 {
+    .bar#{$i} {
+      animation-delay: #{$delay}s;
+    }
+    $delay: $delay + 0.1;
+  }
+  .bar1 {
+    background-color: #754fa0;
+  }
+  .bar2 {
+    background-color: #09b7bf;
+  }
+  .bar3 {
+    background-color: #90d36b;
+  }
+  .bar4 {
+    background-color: #f2d40d;
+  }
+  .bar5 {
+    background-color: #fcb12b;
+  }
+  .bar6 {
+    background-color: #ed1b72;
+  }
+}
+
+@keyframes delay {
+  0%,
+  40%,
+  100% {
+    transform: scaleY(0.05);
+  }
+  20% {
+    transform: scaleY(1);
+  }
+}
