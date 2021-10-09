@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 import App from './views/App'
 
-import './index.scss'
+import './sass/_all.scss'
 
 ReactDOM.render(
   <React.StrictMode>
