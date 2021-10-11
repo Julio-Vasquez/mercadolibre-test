@@ -1,14 +1,15 @@
 import { Breadcrumb } from 'antd'
 import { Link } from '@reach/router'
 
-import { SearchResult } from '../views/SearchResult/SearchResult'
 import { layout } from './Layout.module.scss'
+import SearchBar from '../views/SearchBar'
 
-export const Layout = () => {
+export const Layout = ({ children }) => {
   const { Item } = Breadcrumb
 
   return (
     <div className={layout}>
+      <SearchBar />
       <Breadcrumb>
         <Item>Home</Item>
         <Item>
@@ -19,7 +20,7 @@ export const Layout = () => {
         </Item>
         <Item>An Application</Item>
       </Breadcrumb>
-      <SearchResult />
+      {children}
     </div>
   )
 }

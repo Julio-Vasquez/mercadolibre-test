@@ -32,3 +32,5 @@ export const SearchResult = () => {
     </Col>
   )
 }
+
+export default SearchResult

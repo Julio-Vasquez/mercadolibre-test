@@ -1,9 +1,11 @@
-import { Layout } from '../layout'
+import { AppRoutes } from '../routes/AppRoutes'
 
 const App = () => {
-  return <div className="App">
-    <Layout/>
-  </div>
+  return (
+    <div className="App">
+      <AppRoutes />
+    </div>
+  )
 }
 
 export default App
