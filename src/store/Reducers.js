@@ -1,10 +1,12 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
 //reducers
-import ProductReducer, { Product } from './../services/Products/ProductSlice'
+import ProductsReducer, { Products } from '../services/Products/ProductsSlice'
+import ItemReducer, { Item } from '../services/Item/ItemSlice'
 
 const AppReducer = combineReducers({
-  [Product]: ProductReducer,
+  [Products]: ProductsReducer,
+  [Item]: ItemReducer,
 })
 
 //aqui se procesa si hay estado de login
