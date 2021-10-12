@@ -1,10 +1,10 @@
 import { fork, all } from 'redux-saga/effects'
 
 import ProductsSaga from './../services/Products/ProductsSaga'
-import ItemSlice from '../services/Item/ItemSlice'
+import ItemSaga from '../services/Item/ItemSaga'
 
 function* RootSagas() {
-  yield all([fork(ProductsSaga), fork(ItemSlice)])
+  yield all([fork(ProductsSaga), fork(ItemSaga)])
 }
 
 export default RootSagas

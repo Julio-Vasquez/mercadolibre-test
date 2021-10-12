@@ -3,13 +3,16 @@ import { all, takeLatest, put } from 'redux-saga/effects'
 import { getItemById, getItemByIdFailed, getItemByIdSuccess } from './ItemSlice'
 import { GET } from './../../common/api'
 
-function* FetchGetItemById() {
-  const result = yield GET({ url: 'url consulta' })
-
+function* FetchGetItemById({ type, payload }) {
+  const result = yield GET({ url: `items/${payload.id}` })
+  console.log(result)
   yield put(
     result?.ok && result?.status === 200
-      ? getItemByIdSuccess(result.payload)
-      : getItemByIdFailed(result.payload)
+      ? getItemByIdSuccess({
+          success: result.statusText,
+          item: result.payload,
+        })
+      : getItemByIdFailed({ error: result.payload.message })
   )
 }
 
