@@ -1,3 +1,17 @@
-.search{
+.search {
+  background-color: #fff159;
 
+  .logo {
+  }
+
+  .bar {
+    .ant-input-group .ant-input {
+      width: 97%;
+    }
+
+    .ant-row {
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }
