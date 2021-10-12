@@ -2,9 +2,9 @@ import { message } from 'antd'
 import { BASE_URL_API } from './config'
 
 const errorJson = {
+  400: 'No se pudo interpretar la solicitud dada',
   401: 'No Autorizado',
   404: 'El servidor no pudo encontrar el contenido solicitado',
-  400: 'No se pudo interpretar la solicitud dada',
 }
 
 export const GET = async ({ url }) => {
@@ -17,7 +17,6 @@ export const GET = async ({ url }) => {
   })
     .then(async res => {
       if (res.statusText !== 'OK') message.error(errorJson[res.status])
-
       res.payload = await res.json()
       return res
     })
@@ -37,9 +36,7 @@ export const POST = async ({ url, body = {}, header = {} }) => {
     body: JSON.stringify(body),
   })
     .then(async res => {
-      if (res.status === 401) return res
-      else if (res.status === 404)
-        message.error('Conexión con el servidor fallida')
+      if (res.statusText !== 'OK') message.error(errorJson[res.status])
       res.payload = await res.json()
       return res
     })
@@ -57,9 +54,7 @@ export const PUT = async ({ url, body = {}, header = {} }) => {
     body: JSON.stringify(body),
   })
     .then(async res => {
-      if (res.status === 401) return res
-      else if (res.status === 404)
-        message.error('Conexión con el servidor fallida')
+      if (res.statusText !== 'OK') message.error(errorJson[res.status])
       res.payload = await res.json()
       return res
     })
@@ -77,9 +72,7 @@ export const DELETE = async ({ url, body = {}, header = {} }) => {
     body: body ? JSON.stringify(body) : '',
   })
     .then(async res => {
-      if (res.status === 401) return res
-      else if (res.status === 404)
-        message.error('Conexión con el servidor fallida')
+      if (res.statusText !== 'OK') message.error(errorJson[res.status])
       res.payload = await res.json()
       return res
     })
