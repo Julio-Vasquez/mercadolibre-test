@@ -7,8 +7,6 @@ import { useData } from './../../hooks/useData'
 import { Loading } from './../../components/Loading'
 import { Item, getItemById } from './../../services/Item/ItemSlice'
 
-import { StylesProduct } from './DetailProduct.module.scss'
-
 export const DetailProduct = () => {
   const dispatch = useDispatch()
   const { id } = useParams()
@@ -19,7 +17,7 @@ export const DetailProduct = () => {
 
   const itemData = useData({ reducer: Item })
 
-  if (itemData.loadingItem)
+  if (itemData.loadingItem || !itemData)
     return (
       <div>
         <Loading />
@@ -27,9 +25,9 @@ export const DetailProduct = () => {
       </div>
     )
   else if (itemData.error.error) return <h1>{itemData.error.message}</h1>
-  console.log(itemData)
+
   return (
-    <div className={StylesProduct}>
+    <div>
       <Col xs={{ span: 24 }}>
         <Row
           gutter={[16, { xs: 8, sm: 16, md: 24, lg: 32 }]}
