@@ -6,7 +6,7 @@ export const SearchResult = () => {
   const loading = false
 
   return loading ? (
-    <Skeleton active />
+    <Skeleton />
   ) : (
     <Col className={SearchResultStyles} xs={{ span: 24 }}>
       {/* Contenedor blanco */}
