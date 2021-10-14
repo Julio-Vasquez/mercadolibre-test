@@ -4,11 +4,7 @@ import { getItemById, getItemByIdFailed, getItemByIdSuccess } from './ItemSlice'
 import { GET } from './../../common/api'
 
 function* FetchGetItemById({ type, payload }) {
-  console.log(payload)
   const result = yield GET({ url: `items/${payload.id}` })
-  console.log('============================')
-  console.log(result)
-  console.log('============================')
   yield put(
     result?.ok && result?.status === 200
       ? getItemByIdSuccess({

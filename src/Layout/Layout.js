@@ -1,8 +1,8 @@
 import { Breadcrumb } from 'antd'
-import { Link } from '@reach/router'
+//import { Link } from 'react-router-dom'
 
-import { layout } from './Layout.module.scss'
 import SearchBar from '../views/SearchBar'
+import { layout } from './Layout.module.scss'
 
 export const Layout = ({ children }) => {
   const { Item } = Breadcrumb
@@ -12,12 +12,7 @@ export const Layout = ({ children }) => {
       <SearchBar />
       <Breadcrumb>
         <Item>Home</Item>
-        <Item>
-          <Link to="/">Aplication center</Link>
-        </Item>
-        <Item>
-          <Link to="/">Application List</Link>
-        </Item>
+
         <Item>An Application</Item>
       </Breadcrumb>
       {children}

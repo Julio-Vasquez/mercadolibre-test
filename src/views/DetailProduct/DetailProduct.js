@@ -1,23 +1,27 @@
 import { useEffect } from 'react'
-import { useParams } from '@reach/router'
-import { useDispatch } from 'react-redux'
 import { Skeleton, Col, Row, Button } from 'antd'
-import { details, description } from './DetailProduct.module.scss'
+import { useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
-import { useData } from './../../hooks/useData'
 import { Loading } from './../../components/Loading'
+import { useData } from './../../hooks/useData'
 import { Item, getItemById } from './../../services/Item/ItemSlice'
+
+import { details, description } from './DetailProduct.module.scss'
+import { NoParam } from '../../components/NoParam'
 
 export const DetailProduct = () => {
   const dispatch = useDispatch()
+
   const { id } = useParams()
 
   useEffect(() => {
-    dispatch(getItemById({ id: id }))
+    if (id) dispatch(getItemById({ id: id }))
   }, [dispatch, id])
 
   const itemData = useData({ reducer: Item })
 
+  if (!id) return <NoParam />
   if (itemData.loadingItem || !itemData)
     return (
       <div>
@@ -27,7 +31,9 @@ export const DetailProduct = () => {
     )
   else if (itemData.error.error) return <h1>{itemData.error.message}</h1>
 
-  return (
+  return !id ? (
+    <NoParam />
+  ) : (
     <Col
       xs={{ span: 24 }}
       sm={{ offset: 2, span: 20 }}

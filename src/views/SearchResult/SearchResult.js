@@ -9,8 +9,6 @@ export const SearchResult = () => {
     <Skeleton />
   ) : (
     <Col className={SearchResultStyles} xs={{ span: 24 }}>
-      {/* Contenedor blanco */}
-
       <Row gutter={[16, { xs: 8, sm: 16, md: 24, lg: 32 }]}>
         <Col className="gutter-row" span={4}>
           <div className={box_style}>
