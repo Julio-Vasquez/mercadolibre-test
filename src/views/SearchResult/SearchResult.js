@@ -1,9 +1,19 @@
 import { Skeleton, Row, Col } from 'antd'
+import { useHistory } from 'react-router-dom'
+
+import { useQuery } from './../../hooks/useQuery'
 
 import { SearchResultStyles, box_style } from './SearchResult.module.scss'
 
 export const SearchResult = () => {
   const loading = false
+  const search = useQuery().get('search'),
+    history = useHistory()
+
+  if (!search) {
+    if (history.length === 2) window.location.href = '/'
+    else history.goBack()
+  }
 
   return loading ? (
     <Skeleton />

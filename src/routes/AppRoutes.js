@@ -16,10 +16,10 @@ export const AppRoutes = () => {
         <Suspense fallback={<Loading />}>
           <Switch>
             <Route component={Root} path="/" exact />
-            <Route component={SearchResult} path="/items?search=:q" />
-            <Route component={DetailProduct} path="/items/:id" exact />
-            <Route component={DetailProduct} path="/items/" exact />
-            <Redirect from="/items/" to="/" />
+            <Route component={SearchResult} path="/items" />
+            <Route component={DetailProduct} path="/items/:id" />
+            <Route component={DetailProduct} path="/items/" strict />
+            <Redirect from="*" to="/" />
           </Switch>
         </Suspense>
       </Layout>
