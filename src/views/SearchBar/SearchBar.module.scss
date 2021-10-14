@@ -1,17 +1,12 @@
 .search {
   background-color: #fff159;
 
-  .logo {
+  .pdr {
+    padding-right: 10px;
   }
 
-  .bar {
-    .ant-input-group .ant-input {
-      width: 97%;
-    }
-
-    .ant-row {
-      justify-content: center;
-      align-items: center;
-    }
+  .ant-btn .ant-btn-primary .ant-btn-lg .ant-input-search-button {
+    border-color: #9b9b9b;
+    background-color: #9b9b9b;
   }
 }

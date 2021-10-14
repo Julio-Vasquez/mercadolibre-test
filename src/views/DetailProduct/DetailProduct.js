@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useParams } from '@reach/router'
 import { useDispatch } from 'react-redux'
 import { Skeleton, Col, Row, Button } from 'antd'
+import { details, description } from './DetailProduct.module.scss'
 
 import { useData } from './../../hooks/useData'
 import { Loading } from './../../components/Loading'
@@ -27,40 +28,42 @@ export const DetailProduct = () => {
   else if (itemData.error.error) return <h1>{itemData.error.message}</h1>
 
   return (
-    <div>
-      <Col xs={{ span: 24 }}>
-        <Row
-          gutter={[16, { xs: 8, sm: 16, md: 24, lg: 32 }]}
-          justify="center"
-          align="top"
-        >
-          <div className="banner">
-            <img
-              src={itemData.item.item.picture.fullImg}
-              alt={itemData.item.item.title}
-            />
-          </div>
-          <div className="details">
+    <Col
+      xs={{ span: 24 }}
+      sm={{ offset: 2, span: 20 }}
+      md={{ offset: 2, span: 20 }}
+      lg={{ offset: 2, span: 20 }}
+      style={{ backgroundColor: '#ffff' }}
+    >
+      <Row>
+        <Col align="middle" span={16} className="gutter-row">
+          <img
+            src={itemData.item.item.picture.fullImg}
+            alt={itemData.item.item.title}
+          />
+        </Col>
+        <Col style={{ paddingTop: '20px' }} span={4} className="gutter-row">
+          <div className={details}>
             <p>
               {itemData.item.item.condition}{' '}
               <span> {itemData.item.item.sold_quantity} Vendidos</span>
             </p>
 
             <h3>{itemData.item.item.title}</h3>
-            <h1>{itemData.item.item.price.amount}</h1>
-            <Button>Comprar</Button>
+            <h1>$ {itemData.item.item.price.amount}</h1>
+            <Button type="primary">Comprar</Button>
           </div>
-        </Row>
-        <Row>
-          <h3>Descripcion titulo</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae
-            ducimus ullam assumenda vel nam nemo, pariatur natus reprehenderit
-            consequatur possimus!
-          </p>
-        </Row>
-      </Col>
-    </div>
+        </Col>
+      </Row>
+      <Row span={4}>
+        <Col offset={1} span={14}>
+          <div className={description}>
+            <h2>Descripción del producto</h2>
+            <p>{itemData.item.item.description}</p>
+          </div>
+        </Col>
+      </Row>
+    </Col>
   )
 }
 
