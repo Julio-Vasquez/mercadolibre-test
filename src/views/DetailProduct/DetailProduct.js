@@ -20,20 +20,17 @@ export const DetailProduct = () => {
   }, [dispatch, id])
 
   const itemData = useData({ reducer: Item })
-
-  if (!id) return <NoParam />
-  if (itemData.loadingItem || !itemData)
+  if (!id) return <NoParam sms="no proporciono un id" />
+  else if (itemData.loadingItem || !itemData)
     return (
       <div>
         <Loading />
         <Skeleton />
       </div>
     )
-  else if (itemData.error.error) return <h1>{itemData.error.message}</h1>
+  else if (itemData.error.error) return <NoParam sms="id invalido" />
 
-  return !id ? (
-    <NoParam />
-  ) : (
+  return (
     <Col
       xs={{ span: 24 }}
       sm={{ offset: 2, span: 20 }}
@@ -51,8 +48,8 @@ export const DetailProduct = () => {
         <Col style={{ paddingTop: '20px' }} span={4} className="gutter-row">
           <div className={details}>
             <p>
-              {itemData.item.item.condition}{' '}
-              <span> {itemData.item.item.sold_quantity} Vendidos</span>
+              {itemData.item.item.condition === 'new' ? 'Nuevo' : 'Usado'}
+              <span> | {itemData.item.item.sold_quantity} Vendidos</span>
             </p>
 
             <h3>{itemData.item.item.title}</h3>

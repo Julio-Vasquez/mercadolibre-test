@@ -7,8 +7,9 @@ import {
 } from './ProductsSlice'
 import { GET } from './../../common/api'
 
-function* FetchGetProducts() {
-  const result = yield GET({ url: 'url consulta' })
+function* FetchGetProducts({ payload }) {
+  console.log(payload)
+  const result = yield GET({ url: `items?q=${payload}` })
 
   yield put(
     result?.ok && result?.status === 200

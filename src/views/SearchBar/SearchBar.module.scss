@@ -1,21 +1,22 @@
 .search {
   background-color: #fff159;
-  justify-content: center;
-  align-items: center;
-  .pdr {
-    user-drag: none;
-    -webkit-user-drag: none;
-    width: 100%;
-    padding-right: 10px;
-    width: 9%;
-    height: 40px;
-  }
-  .autocomplete {
-    width: 90%;
-  }
-
-  .ant-btn .ant-btn-primary .ant-btn-lg .ant-input-search-button {
-    border-color: #9b9b9b;
-    background-color: #9b9b9b;
+  height: 46px;
+  &_container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    .pdr {
+      user-drag: none;
+      -webkit-user-drag: none;
+      width: 9%;
+      img {
+        height: 40px;
+        line-height: 10px;
+        width: 100%;
+      }
+    }
+    .autocomplete {
+      width: 90%;
+    }
   }
 }

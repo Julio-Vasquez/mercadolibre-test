@@ -16,9 +16,9 @@ export const AppRoutes = () => {
         <Suspense fallback={<Loading />}>
           <Switch>
             <Route component={Root} path="/" exact />
-            <Route component={SearchResult} path="/items" />
-            <Route component={DetailProduct} path="/items/:id" />
+            <Route component={DetailProduct} path="/items/:id" strict />
             <Route component={DetailProduct} path="/items/" strict />
+            <Route component={SearchResult} path="/items" />
             <Redirect from="*" to="/" />
           </Switch>
         </Suspense>
