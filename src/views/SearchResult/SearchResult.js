@@ -11,6 +11,7 @@ import { useEffect } from 'react'
 
 export const SearchResult = () => {
   const dispatch = useDispatch()
+
   const search = useQuery().get('search'),
     history = useHistory()
 

@@ -1,10 +1,4 @@
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { Col, Row, Input, AutoComplete, Button } from 'antd'
-import { useHistory } from 'react-router-dom'
-
-import { Result } from './components/Result'
-import { SaveItem } from './../../common/storage'
+import { Col, Row, Input, AutoComplete } from 'antd'
 
 import LogoML from '../../assets/svg/favicon.svg'
 import {
@@ -13,41 +7,16 @@ import {
   autocomplete,
   search_container,
 } from './SearchBar.module.scss'
+import { Result } from './components/Result'
+
 import { getProducts } from '../../services/Products/ProductsSlice'
+import { useAutoComplete } from '../../hooks/useAutoComplete'
 
 export const SearchBar = () => {
-  const history = useHistory()
-  const dispatch = useDispatch()
-  const [options, setOptions] = useState([])
-
-  const handleSearch = value => {
-    console.log(value)
-    if (value) setOptions(Result({ query: value }))
-  }
-  const onSubmitSearch = value => {
-    if (value) {
-      setOptions([])
-      SaveItem({ item: value })
-      dispatch(getProducts(value))
-      history.push(`/items?search=${value}`)
-    }
-  }
-
-  const handleEnter = e => {
-    console.log(e.target.value)
-    if (e.code === 'Enter' || e.code === 'NumpadEnter') {
-      SaveItem({ item: e.target.value })
-      dispatch(getProducts(e.target.value))
-      history.push(`/items?search=${e.target.value}`)
-    }
-  }
-
-  const onSelect = value => {
-    console.log('onSelect', value)
-    SaveItem({ item: value })
-    dispatch(getProducts(value))
-    //if (value) setOptions(Result({ query: value }))
-  }
+  const autoComplete = useAutoComplete({
+    action: getProducts,
+    Result: Result,
+  })
 
   return (
     <Col className={search} span={24}>
@@ -66,16 +35,16 @@ export const SearchBar = () => {
 
             <AutoComplete
               className={autocomplete}
-              onSelect={onSelect}
-              options={options}
-              onSearch={handleSearch}
-              onKeyDown={handleEnter}
+              onSelect={autoComplete.onSelect}
+              options={autoComplete.options}
+              onSearch={autoComplete.onSearch}
+              onKeyDown={autoComplete.handleEnter}
             >
               <Input.Search
                 size="middle"
                 placeholder="Buscar"
                 enterButton
-                onSearch={onSubmitSearch}
+                onSearch={autoComplete.onSubmitSearch}
               />
             </AutoComplete>
           </div>
