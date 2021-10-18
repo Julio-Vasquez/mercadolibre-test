@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Col, Row, Input, AutoComplete } from 'antd'
+import { Col, Row, Input, AutoComplete, Button } from 'antd'
 import { useHistory } from 'react-router-dom'
 
 import { Result } from './components/Result'
@@ -21,10 +21,20 @@ export const SearchBar = () => {
   const [options, setOptions] = useState([])
 
   const handleSearch = value => {
+    console.log(value)
     if (value) setOptions(Result({ query: value }))
+  }
+  const onSubmitSearch = value => {
+    if (value) {
+      setOptions([])
+      SaveItem({ item: value })
+      dispatch(getProducts(value))
+      history.push(`/items?search=${value}`)
+    }
   }
 
   const handleEnter = e => {
+    console.log(e.target.value)
     if (e.code === 'Enter' || e.code === 'NumpadEnter') {
       SaveItem({ item: e.target.value })
       dispatch(getProducts(e.target.value))
@@ -34,6 +44,9 @@ export const SearchBar = () => {
 
   const onSelect = value => {
     console.log('onSelect', value)
+    SaveItem({ item: value })
+    dispatch(getProducts(value))
+    //if (value) setOptions(Result({ query: value }))
   }
 
   return (
@@ -58,7 +71,12 @@ export const SearchBar = () => {
               onSearch={handleSearch}
               onKeyDown={handleEnter}
             >
-              <Input.Search size="middle" placeholder="Buscar" enterButton />
+              <Input.Search
+                size="middle"
+                placeholder="Buscar"
+                enterButton
+                onSearch={onSubmitSearch}
+              />
             </AutoComplete>
           </div>
         </Col>
