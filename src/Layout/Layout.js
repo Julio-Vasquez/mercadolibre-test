@@ -1,3 +1,4 @@
+import { node } from 'prop-types'
 import { Breadcrumb } from 'antd'
 //import { Link } from 'react-router-dom'
 
@@ -6,7 +7,6 @@ import { layout } from './Layout.module.scss'
 
 export const Layout = ({ children }) => {
   const { Item } = Breadcrumb
-
   return (
     <div className={layout}>
       <SearchBar />
@@ -18,4 +18,8 @@ export const Layout = ({ children }) => {
       {children}
     </div>
   )
+}
+
+Layout.propTypes = {
+  children: node.isRequired,
 }
