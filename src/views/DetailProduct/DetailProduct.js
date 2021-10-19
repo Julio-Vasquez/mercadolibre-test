@@ -9,10 +9,10 @@ import { Item, getItemById } from './../../services/Item/ItemSlice'
 
 import { details, description } from './DetailProduct.module.scss'
 import { NoParam } from '../../components/NoParam'
+import { func } from 'prop-types'
 
-export const DetailProduct = () => {
+export const DetailProduct = ({ setSite }) => {
   const dispatch = useDispatch()
-
   const { id } = useParams()
 
   useEffect(() => {
@@ -20,6 +20,12 @@ export const DetailProduct = () => {
   }, [dispatch, id])
 
   const itemData = useData({ reducer: Item })
+
+  useEffect(() => {
+    if (!itemData.loadingItem && itemData.item.item)
+      setSite({ path: itemData.item.item.title, url: `${id}` })
+  }, [setSite, itemData.item?.item, id, itemData.loadingItem])
+
   if (!id) return <NoParam sms="no proporciono un id" />
   else if (itemData.loadingItem || !itemData)
     return (
@@ -68,6 +74,10 @@ export const DetailProduct = () => {
       </Row>
     </Col>
   )
+}
+
+DetailProduct.propTypes = {
+  setSite: func.isRequired,
 }
 
 export default DetailProduct

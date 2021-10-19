@@ -1,3 +1,5 @@
+import { func } from 'prop-types'
+import { useEffect } from 'react'
 import { Col, Row, Input, AutoComplete } from 'antd'
 
 import LogoML from '../../assets/svg/favicon.svg'
@@ -54,4 +56,13 @@ export const SearchBar = () => {
   )
 }
 
-export default SearchBar
+const Root = ({ setSite }) => {
+  useEffect(() => {
+    if (setSite) setSite({ path: 'Inicio', url: '/' })
+  }, [setSite])
+
+  return <></>
+}
+
+Root.propTypes = { setSite: func.isRequired }
+export default Root

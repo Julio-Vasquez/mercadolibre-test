@@ -1,33 +1,38 @@
-import { Skeleton, Row, Col } from 'antd'
-import { useHistory, Redirect, Link } from 'react-router-dom'
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import { Redirect, Link } from 'react-router-dom'
+import { Skeleton, Row, Col, Empty } from 'antd'
+import { func } from 'prop-types'
 
 import { useQuery } from './../../hooks/useQuery'
 import { useData } from './../../hooks/useData'
 import { getProducts, Products } from '../../services/Products/ProductsSlice'
 
 import { SearchResultStyles, box_style } from './SearchResult.module.scss'
-import { useEffect } from 'react'
 
-export const SearchResult = () => {
+export const SearchResult = ({ setSite }) => {
   const dispatch = useDispatch()
-
-  const search = useQuery().get('search'),
-    history = useHistory()
-
+  const search = useQuery().get('search')
   const { loadingProducts, dataProducts } = useData({ reducer: Products })
 
   useEffect(() => {
     if (search && dataProducts.length === 0) dispatch(getProducts(search))
   }, [search, dispatch, dataProducts.length])
 
-  if (!search) {
-    if (history.length === 2) return <Redirect to="/" />
-    else return <Redirect to="/" />
-  } else if (loadingProducts) return <Skeleton />
+  useEffect(() => {
+    setSite({ path: `resultado de busqueda - [${search}]`, url: '/items' })
+  }, [setSite, search])
+
+  if (!search) return <Redirect to="/" />
+  if (loadingProducts) return <Skeleton />
 
   return !dataProducts['items'] ? (
-    <Redirect to="/" />
+    <>
+      <Empty
+        image={Empty.PRESENTED_IMAGE_SIMPLE}
+        description={<span>No hay resultados de esa busqueda : {search}</span>}
+      />
+    </>
   ) : (
     <Col className={SearchResultStyles} xs={{ span: 24 }}>
       {dataProducts['items'].map((item, key) => (
@@ -58,6 +63,10 @@ export const SearchResult = () => {
       ))}
     </Col>
   )
+}
+
+SearchResult.propTypes = {
+  setSite: func.isRequired,
 }
 
 export default SearchResult

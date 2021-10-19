@@ -21,11 +21,11 @@ const ProductsSlice = createSlice({
   reducers: {
     getProducts: state => ({
       ...state,
-      loadingProduct: true,
+      loadingProducts: true,
     }),
     getProductsFailed: (state, { payload }) => ({
       ...state,
-      loadingProduct: false,
+      loadingProducts: false,
       success: {
         ...state.success,
         message: '',
