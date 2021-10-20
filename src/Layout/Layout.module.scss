@@ -2,4 +2,12 @@
   display: flex;
   flex-direction: column;
   background-color: #ebebeb;
+  padding-bottom: 51px;
+
+  .breadcrumb{
+    padding: 15px 0px;
+    span a{
+      color: #656565;
+    }
+  }
 }

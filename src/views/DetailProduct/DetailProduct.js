@@ -51,7 +51,7 @@ export const DetailProduct = ({ setSite }) => {
             alt={itemData.item.item.title}
           />
         </Col>
-        <Col style={{ paddingTop: '20px' }} span={4} className="gutter-row">
+        <Col span={7} className="gutter-row">
           <div className={details}>
             <p>
               {itemData.item.item.condition === 'new' ? 'Nuevo' : 'Usado'}

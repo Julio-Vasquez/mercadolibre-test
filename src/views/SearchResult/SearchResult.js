@@ -1,32 +1,32 @@
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { Redirect, Link } from 'react-router-dom'
-import { Skeleton, Row, Col, Empty } from 'antd'
-import { func } from 'prop-types'
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Redirect, Link } from "react-router-dom";
+import { Skeleton, Row, Col, Empty, Divider } from "antd";
+import { func } from "prop-types";
 
-import { useQuery } from './../../hooks/useQuery'
-import { useData } from './../../hooks/useData'
-import { getProducts, Products } from '../../services/Products/ProductsSlice'
+import { useQuery } from "./../../hooks/useQuery";
+import { useData } from "./../../hooks/useData";
+import { getProducts, Products } from "../../services/Products/ProductsSlice";
 
-import { SearchResultStyles, box_style } from './SearchResult.module.scss'
+import { SearchResultStyles, image } from "./SearchResult.module.scss";
 
 export const SearchResult = ({ setSite }) => {
-  const dispatch = useDispatch()
-  const search = useQuery().get('search')
-  const { loadingProducts, dataProducts } = useData({ reducer: Products })
+  const dispatch = useDispatch();
+  const search = useQuery().get("search");
+  const { loadingProducts, dataProducts } = useData({ reducer: Products });
 
   useEffect(() => {
-    if (search && dataProducts.length === 0) dispatch(getProducts(search))
-  }, [search, dispatch, dataProducts.length])
+    if (search && dataProducts.length === 0) dispatch(getProducts(search));
+  }, [search, dispatch, dataProducts.length]);
 
   useEffect(() => {
-    setSite({ path: `resultado de busqueda - [${search}]`, url: '/items' })
-  }, [setSite, search])
+    setSite({ path: `resultado de busqueda - [${search}]`, url: "/items" });
+  }, [setSite, search]);
 
-  if (!search) return <Redirect to="/" />
-  if (loadingProducts) return <Skeleton />
+  if (!search) return <Redirect to="/" />;
+  if (loadingProducts) return <Skeleton />;
 
-  return !dataProducts['items'] ? (
+  return !dataProducts["items"] ? (
     <>
       <Empty
         image={Empty.PRESENTED_IMAGE_SIMPLE}
@@ -34,39 +34,52 @@ export const SearchResult = ({ setSite }) => {
       />
     </>
   ) : (
-    <Col className={SearchResultStyles} xs={{ span: 24 }}>
-      {dataProducts['items'].map((item, key) => (
-        <Row gutter={[16, { xs: 8, sm: 16, md: 24, lg: 32 }]} key={key}>
-          <Col className="gutter-row" span={4}>
-            <div className={box_style}>
-              <Link to={`/items/${item['id']}`}>
-                <img src={item['picture']} alt={item['title']} width="50px" />
+    <Col
+      className={SearchResultStyles}
+      xs={{ span: 24 }}
+      sm={{ offset: 2, span: 20 }}
+      md={{ offset: 2, span: 20 }}
+      lg={{ offset: 2, span: 20 }}
+      style={{ backgroundColor: "#ffff" }}
+    >
+      {dataProducts["items"].map((item, key) => (
+        <Row key={key} align={"middle"}>
+          <Col className="gutter-row" span={6}>
+            <div>
+              <Link to={`/items/${item["id"]}`}>
+                <img
+                  className={image}
+                  src={item["picture"]}
+                  alt={item["title"]}
+                  width="140px"
+                />
               </Link>
             </div>
           </Col>
-          <Col className="gutter-row" span={16}>
-            <Link to={`/items/${item['id']}`}>
-              <div className={box_style}>
+          <Col className="gutter-row" span={15}>
+            <Link to={`/items/${item["id"]}`}>
+              <div>
                 <h3>
-                  $ {item['price']['amount']}.{item['price']['decimals']}
+                  $ {item["price"]["amount"]}.{item["price"]["decimals"]}
                 </h3>
-                <p>{item['title']}</p>
+                <p>{item["title"]}</p>
               </div>
             </Link>
           </Col>
-          <Col className="gutter-row" span={4}>
-            <div className={box_style}>
+          <Col className="gutter-row" span={2}>
+            <div>
               <p>Ubicacion</p>
             </div>
           </Col>
+          <Divider/>
         </Row>
       ))}
     </Col>
-  )
-}
+  );
+};
 
 SearchResult.propTypes = {
   setSite: func.isRequired,
-}
+};
 
-export default SearchResult
+export default SearchResult;

@@ -1,68 +1,58 @@
-import { func } from 'prop-types'
-import { useEffect } from 'react'
-import { Col, Row, Input, AutoComplete } from 'antd'
+import { func } from "prop-types";
+import { useEffect } from "react";
+import { Col, Input, AutoComplete, Row } from "antd";
 
-import LogoML from '../../assets/svg/favicon.svg'
+import LogoML from "../../assets/svg/favicon.svg";
 import {
   search,
   pdr,
   autocomplete,
   search_container,
-} from './SearchBar.module.scss'
-import { Result } from './components/Result'
+} from "./SearchBar.module.scss";
+import { Result } from "./components/Result";
 
-import { getProducts } from '../../services/Products/ProductsSlice'
-import { useAutoComplete } from '../../hooks/useAutoComplete'
+import { getProducts } from "../../services/Products/ProductsSlice";
+import { useAutoComplete } from "../../hooks/useAutoComplete";
 
 export const SearchBar = () => {
   const autoComplete = useAutoComplete({
     action: getProducts,
     Result: Result,
-  })
+  });
 
   return (
-    <Col className={search} span={24}>
-      <Row gutter={[16, { xs: 8, sm: 16, md: 24, lg: 32 }]} align="middle">
-        <Col
-          className={search}
-          xs={{ span: 22, offset: 1 }}
-          sm={{ offset: 2, span: 20 }}
-          md={{ offset: 4, span: 16 }}
-          lg={{ offset: 6, span: 12 }}
+    <Row className={search} justify={"center"} align={"middle"}>
+      <Col span={10} className={search_container}>
+        <div className={pdr}>
+          <img src={LogoML} alt="Mercado Libre argentina" />
+        </div>
+      </Col>
+      <Col span={10}>
+        <AutoComplete
+          className={autocomplete}
+          onSelect={autoComplete.onSelect}
+          options={autoComplete.options}
+          onSearch={autoComplete.onSearch}
+          onKeyDown={autoComplete.handleEnter}
         >
-          <div className={search_container}>
-            <div className={pdr}>
-              <img src={LogoML} alt="Mercado Libre argentina" />
-            </div>
-
-            <AutoComplete
-              className={autocomplete}
-              onSelect={autoComplete.onSelect}
-              options={autoComplete.options}
-              onSearch={autoComplete.onSearch}
-              onKeyDown={autoComplete.handleEnter}
-            >
-              <Input.Search
-                size="middle"
-                placeholder="Buscar"
-                enterButton
-                onSearch={autoComplete.onSubmitSearch}
-              />
-            </AutoComplete>
-          </div>
-        </Col>
-      </Row>
-    </Col>
-  )
-}
+          <Input.Search
+            placeholder="Buscar"
+            enterButton
+            onSearch={autoComplete.onSubmitSearch}
+          />
+        </AutoComplete>
+      </Col>
+    </Row>
+  );
+};
 
 const Root = ({ setSite }) => {
   useEffect(() => {
-    if (setSite) setSite({ path: 'Inicio', url: '/' })
-  }, [setSite])
+    if (setSite) setSite({ path: "Inicio", url: "/" });
+  }, [setSite]);
 
-  return <></>
-}
+  return <></>;
+};
 
-Root.propTypes = { setSite: func.isRequired }
-export default Root
+Root.propTypes = { setSite: func.isRequired };
+export default Root;
