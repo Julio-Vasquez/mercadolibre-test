@@ -59,7 +59,10 @@ export const DetailProduct = ({ setSite }) => {
             </p>
 
             <h3>{itemData.item.item.title}</h3>
-            <h1>$ {itemData.item.item.price.amount}</h1>
+            <h1>
+              $ {itemData.item.item.price.amount}.
+              {itemData.item.item.price.decimals}
+            </h1>
             <Button type="primary">Comprar</Button>
           </div>
         </Col>
