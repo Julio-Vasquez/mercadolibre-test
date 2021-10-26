@@ -3,28 +3,22 @@
   height: 46px;
   &_container {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center;    
     height: 100%;
-    width: 100%;
     .pdr {
       user-drag: none;
       -webkit-user-drag: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
+      width: 9%;
 
       img {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 8%;
+        height: 40px;
+        line-height: 10px;
+        width: 100%;
       }
     }
   }
   .autocomplete {
-    display: flex;
-    width: 100%;
+    margin-left: 20px;
+    width: 90%;
   }
 }

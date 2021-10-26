@@ -21,28 +21,40 @@ export const SearchBar = () => {
   });
 
   return (
-    <Row className={search} justify={"center"} align={"middle"}>
-      <Col span={10} className={search_container}>
-        <div className={pdr}>
-          <img src={LogoML} alt="Mercado Libre argentina" />
-        </div>
-      </Col>
-      <Col span={10}>
-        <AutoComplete
-          className={autocomplete}
-          onSelect={autoComplete.onSelect}
-          options={autoComplete.options}
-          onSearch={autoComplete.onSearch}
-          onKeyDown={autoComplete.handleEnter}
+    <Col className={search} span={24}>
+      <Row gutter={[16, { xs: 8, sm: 16, md: 24, lg: 32 }]} align="middle">
+        <Col className={search}
+          xs={{ span: 22, offset: 1 }}
+          sm={{ span: 18, offset: 3 }}
+          md={{ span: 16, offset: 4 }}
+          lg={{ span: 12, offset: 6 }}
+
         >
-          <Input.Search
-            placeholder="Buscar"
-            enterButton
-            onSearch={autoComplete.onSubmitSearch}
-          />
-        </AutoComplete>
-      </Col>
-    </Row>
+          <div className={search_container}>
+
+            <div className={pdr}>
+              <img src={LogoML} alt="Mercado Libre argentina" />
+            </div>
+
+
+            <AutoComplete
+              className={autocomplete}
+              onSelect={autoComplete.onSelect}
+              options={autoComplete.options}
+              onSearch={autoComplete.onSearch}
+              onKeyDown={autoComplete.handleEnter}
+            >
+              <Input.Search
+                placeholder="Buscar"
+                size="middle"
+                enterButton
+                onSearch={autoComplete.onSubmitSearch}
+              />
+            </AutoComplete>
+          </div>
+        </Col>
+      </Row >
+    </Col >
   );
 };
 
