@@ -1,15 +1,12 @@
-import { node, object } from "prop-types";
-import { Breadcrumb, Col } from "antd";
-import { Link } from "react-router-dom";
+import { node, object } from 'prop-types'
+import { Breadcrumb, Col } from 'antd'
+import { Link } from 'react-router-dom'
 
-import { SearchBar } from "../views/SearchBar";
-import { layout, breadcrumb } from "./Layout.module.scss";
+import { SearchBar } from '../views/SearchBar'
+import { layout, breadcrumb } from './Layout.module.scss'
 
 export const Layout = ({ children, site }) => {
-  console.log(site);
-
-  console.log(site);
-  const { Item } = Breadcrumb;
+  const { Item } = Breadcrumb
   return (
     <div className={layout}>
       <SearchBar />
@@ -23,21 +20,21 @@ export const Layout = ({ children, site }) => {
           <Item>
             <Link to="/">Inicio</Link>
           </Item>
-          {site?.path && site.path !== "Inicio" ? (
+          {site?.path && site.path !== 'Inicio' ? (
             <Item>
               <Link to={site.url}>{site.path}</Link>
             </Item>
           ) : (
-            ""
+            ''
           )}
         </Breadcrumb>
       </Col>
-      {children}
+      <div>{children}</div>
     </div>
-  );
-};
+  )
+}
 
 Layout.propTypes = {
   children: node.isRequired,
   site: object.isRequired,
-};
+}

@@ -1,9 +1,13 @@
+import { HelmetProvider } from 'react-helmet-async'
+
 import { AppRoutes } from '../routes/AppRoutes'
 
 const App = () => {
   return (
     <div className="App">
-      <AppRoutes />
+      <HelmetProvider>
+        <AppRoutes />
+      </HelmetProvider>
     </div>
   )
 }

@@ -10,6 +10,7 @@ import { Item, getItemById } from './../../services/Item/ItemSlice'
 import { details, description } from './DetailProduct.module.scss'
 import { NoParam } from '../../components/NoParam'
 import { func } from 'prop-types'
+import { Meta } from '../../components/Meta'
 
 export const DetailProduct = ({ setSite }) => {
   const dispatch = useDispatch()
@@ -44,6 +45,12 @@ export const DetailProduct = ({ setSite }) => {
       lg={{ offset: 2, span: 20 }}
       style={{ backgroundColor: '#ffff' }}
     >
+      <Meta
+        title={itemData['item']['item']['title']}
+        description={`Detalle del producto: ${itemData['item']['item']['title']}`}
+        keywords={['detalle', ...itemData['item']['item']['title'].split(' ')]}
+        importantTitle={itemData['item']['item']['title']}
+      />
       <Row>
         <Col align="middle" span={16} className="gutter-row">
           <img

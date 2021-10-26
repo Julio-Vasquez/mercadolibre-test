@@ -4,7 +4,6 @@ import { CheckItem } from './../../../../common/storage'
 import { result_container } from './Result.module.scss'
 
 export const Result = ({ query }) => {
-  console.log(query, 'desde result')
   let searchs = CheckItem({ item: query })
   if (searchs.length > 5 ? 5 : searchs.length) searchs = searchs.slice(0, 5)
   return searchs.map((item, key) => {
