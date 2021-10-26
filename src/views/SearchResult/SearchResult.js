@@ -1,4 +1,9 @@
 import { useEffect } from 'react'
+<<<<<<< Updated upstream
+=======
+import { Skeleton, Row, Col } from 'antd'
+import { useHistory, Redirect, Link } from 'react-router-dom'
+>>>>>>> Stashed changes
 import { useDispatch } from 'react-redux'
 import { Redirect, Link } from 'react-router-dom'
 import { Skeleton, Row, Col, Empty, Divider } from 'antd'
@@ -8,8 +13,12 @@ import { useQuery } from './../../hooks/useQuery'
 import { useData } from './../../hooks/useData'
 import { getProducts, Products } from '../../services/Products/ProductsSlice'
 
+<<<<<<< Updated upstream
 import { SearchResultStyles, image } from './SearchResult.module.scss'
 import { Meta } from '../../components/Meta'
+=======
+import { SearchResultStyles, box_style } from './SearchResult.module.scss'
+>>>>>>> Stashed changes
 
 export const SearchResult = ({ setSite }) => {
   const dispatch = useDispatch()
@@ -20,12 +29,20 @@ export const SearchResult = ({ setSite }) => {
     if (search && dataProducts.length === 0) dispatch(getProducts(search))
   }, [search, dispatch, dataProducts.length])
 
+<<<<<<< Updated upstream
   useEffect(() => {
     setSite({ path: `resultado de busqueda - [${search}]`, url: '/items' })
   }, [setSite, search])
 
   if (!search) return <Redirect to="/" />
   if (loadingProducts) return <Skeleton />
+=======
+  if (!search) {
+    if (history.length === 2) return <Redirect to="/" />
+    else return <Redirect to="/" />
+  } else if (loadingProducts) return <Skeleton />
+  console.log(dataProducts)
+>>>>>>> Stashed changes
 
   return !dataProducts['items'] ? (
     <>
@@ -73,9 +90,15 @@ export const SearchResult = ({ setSite }) => {
               </div>
             </Link>
           </Col>
+<<<<<<< Updated upstream
           <Col className="gutter-row" span={2}>
             <div>
               <p>Ubicacion</p>
+=======
+          <Col className="gutter-row" span={4}>
+            <div className={box_style}>
+              <p>ubucacion</p>
+>>>>>>> Stashed changes
             </div>
           </Col>
           <Divider />
